@@ -7,8 +7,4 @@ router.get('/', function(req, res, next) {
 });
 
 //module.exports = router;
-module.exports = function(app) {
-	app.get('/', function(rea, res) {
-		res.render('index', { title: 'Express' });
-	});
-};
+module.exports = router;

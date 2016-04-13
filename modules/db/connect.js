@@ -2,18 +2,25 @@
  * Establish connection to database
  */
 var db = db || {},
+	dbinfo = require('./dbinfo');
 	MongoClient = require('mongodb').MongoClient;
 
-
-//var hostname = 'ds023108.mlab.com:23108/housekeeper';
-
-db.connect = function(dbuser, dbpassword, hostname, fn) {
-	var url = 'mongodb://' + dbuser + ':' + dbpassword + '@' + hostname;
+db.connect = function(fn) {
+	var info = dbinfo(),
+		dbuser = info.dbuser,
+		dbpassword = info.dbpassword,
+		uri = info.uri;
+	if(dbuser === '' && dbpassword === '') {
+		var url = 'mongodb://' + uri;
+	} else {
+		var url = 'mongodb://' + dbuser + ':' + dbpassword + '@' + uri;
+	}
+	console.log('url =>', url)
 	MongoClient.connect(url, function(err, db) {
 		if (err) 
 			throw err;
 		fn(db);
-		db.close();
+		//console.log('connection closed.');
 	});
 };
 

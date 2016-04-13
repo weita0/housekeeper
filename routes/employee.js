@@ -1,0 +1,31 @@
+var express = require('express');
+var router = express.Router();
+var reg = require('../modules/emp/register');
+var login = require('../modules/emp/login');
+var employee = require('../modules/model/employee');
+
+router.get('/', function(req, res) {
+	res.send('employee management system');
+});
+
+router.post('/reg', function(req, res) {
+	var name = req.body.name,
+		password = req.body.password,
+		gender = req.body.gender,
+		birth = req.body.birth,
+		locate = req.body.locate,
+		idnum = req.body.idnum;
+	reg(employee(name, password, gender, birth, locate, idnum), function(employee) {
+		res.send(JSON.stringify(employee));
+	});
+});
+
+router.post('/login', function(req, res) {
+	var workid = req.body.workid,
+		password = req.body.password;
+	login(employee({workid: workid, password: password}), function(employee) {
+		res.send(JSON.stringify(employee));
+	});
+});
+
+module.exports = router;
