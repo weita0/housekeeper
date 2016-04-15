@@ -1,10 +1,6 @@
-var db = require('../modules/db/connect'),
-	dbinfo = require('../modules/db/dbinfo')();
+var db = require('../modules/db/connect');
 
-var dbuser = dbinfo.dbuser,
-	dbpassword = dbinfo.dbpassword,
-	hostname = dbinfo.uri;
-
-db.connect(dbuser, dbpassword, hostname, function(db) {
+db.connect(function(db) {
 	console.log(db);
+	db.close();
 });

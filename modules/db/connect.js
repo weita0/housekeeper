@@ -15,6 +15,7 @@ db.connect = function(fn) {
 	} else {
 		var url = 'mongodb://' + dbuser + ':' + dbpassword + '@' + uri;
 	}
+	
 	console.log('url =>', url)
 	MongoClient.connect(url, function(err, db) {
 		if (err) 

@@ -1,7 +1,7 @@
 {
-	"dbuser": "",
-	"dbpassword": "",
-	"hostname": "localhost",
-	"port": 27017,
+	"dbuser": "weitao",
+	"dbpassword": "weitao",
+	"hostname": "ds023108.mlab.com",
+	"port": 23108,
 	"dbname": "housekeeper"
 }

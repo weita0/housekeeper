@@ -1,9 +1,8 @@
-
-module.exports = function(workid, rate, comment, username) {
+module.exports = function(workid, rate, comment, tel) {
 	return {
 		workid: workid,
 		rate: rate,
 		comment: comment,
-		username: username
+		tel: tel
 	};
 };

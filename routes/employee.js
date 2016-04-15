@@ -15,7 +15,15 @@ router.post('/reg', function(req, res) {
 		birth = req.body.birth,
 		locate = req.body.locate,
 		idnum = req.body.idnum;
-	reg(employee(name, password, gender, birth, locate, idnum), function(employee) {
+		type = req.body.type;
+	reg(employee({
+			name: name, 
+			password: password, 
+			gender: gender,
+			birth: birth,
+			locate: locate, 
+			idnum: idnum,
+			type: type}), function(employee) {
 		res.send(JSON.stringify(employee));
 	});
 });
