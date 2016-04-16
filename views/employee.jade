@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	h1 Employee Management System
+	form(action="/employee/reg", method="post")
+		label(for="name") Name:
+		input(type="text", name="name")
+		br
+		label(for="password") Password:
+		input(type="password", name="password")
+		br
+		label(for="gender") Gender:
+		input(type="radio", name="gender", value="m") 
+		input(type="radio", name="gender", value="f") 
+		br
+		label(for="birth") birthday:
+		input(type="text", name="birth")
+		br
+		label(for="locate") locate:
+		input(type="text", name="locate")
+		br
+		label(for="idnum") ID Card Number:
+		input(type="idnum", name="idnum")
+		br
+		label(for="type") Type:
+		input(type="text", name="type")
+		br
+		input(type="submit", value="提交")

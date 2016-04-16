@@ -3,13 +3,12 @@
  * This module is used for new employee to register in the system. 
  */
 
-module.exports = reg;
-
 var db = require('../db/connect'),
 	encrypt = require('../security/encrypt'),
 	workid = require('./workid');
 
 var reg = function(employee, fn) {
+	console.log(employee);
 	db.connect(function(db) {
 		var exist = false;
 		var cursor = db.collection('employee').find();
@@ -21,7 +20,7 @@ var reg = function(employee, fn) {
 			if(err)
 				throw err;
 			if(!exist) {
-				employee.password = encrypt(employee.password);
+				employee.password = encrypt(String(employee.password));
 				employee.workid = workid.createID(employee.idnum);
 				//console.log('before insert =>', employee);
 				db.collection('employee').insertOne(employee);
@@ -40,3 +39,4 @@ var reg = function(employee, fn) {
 	});
 }
 
+module.exports = reg;

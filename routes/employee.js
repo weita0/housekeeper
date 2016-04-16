@@ -5,7 +5,7 @@ var login = require('../modules/emp/login');
 var employee = require('../modules/model/employee');
 
 router.get('/', function(req, res) {
-	res.send('employee management system');
+	res.render('employee');
 });
 
 router.post('/reg', function(req, res) {
@@ -16,14 +16,22 @@ router.post('/reg', function(req, res) {
 		locate = req.body.locate,
 		idnum = req.body.idnum;
 		type = req.body.type;
-	reg(employee({
+	console.log('name -', name,
+				'\npwd -', password,
+				'\ngen -', gender,
+				'\nbir -', birth,
+				'\nloc -', locate,
+				'\nidnum -', idnum,
+				'\ntype -', type);
+	/* to be done... */
+	reg(employee(
 			name: name, 
 			password: password, 
 			gender: gender,
 			birth: birth,
 			locate: locate, 
 			idnum: idnum,
-			type: type}), function(employee) {
+			type: type), function(employee) {
 		res.send(JSON.stringify(employee));
 	});
 });
