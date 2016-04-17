@@ -6,7 +6,7 @@ var logger = require('../modules/util/logger');
 
 
 router.get('/', function(req, res) {
-	res.render('comment');
+	res.render('comment', {array: [1, 2, 3, 4, 5]});
 });
 
 router.post('/submit', function(req, res) {

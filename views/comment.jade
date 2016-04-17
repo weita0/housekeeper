@@ -20,7 +20,10 @@ block content
 	h2 Search comments
 	form(method="post", name="search")
 		label(for="workid") WorkID:
-		input(name="workid", type="text")
+		select(name="workid")
+			- for(var i = 0; i < #{array}.length; i++) {
+				option #{array}[i]
+			- }
 		br
 		input(value="search",type="submit")
 
