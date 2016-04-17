@@ -5,10 +5,11 @@
 
 var db = require('../db/connect'),
 	encrypt = require('../security/encrypt'),
-	workid = require('./workid');
+	workid = require('./workid'),
+	logger = require('../util/logger');
 
 var reg = function(employee, fn) {
-	console.log(employee);
+	logger.info(employee);
 	db.connect(function(db) {
 		var exist = false;
 		var cursor = db.collection('employee').find();

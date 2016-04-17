@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var submit = require('../modules/comment/insertComment');
 var findComments = require('../modules/comment/findComment');
+var logger = require('../modules/util/logger');
 
 
 router.get('/', function(req, res) {
-	res.send('comment system');
-})
+	res.render('comment');
+});
 
 router.post('/submit', function(req, res) {
 	var workid = req.body.workid,
@@ -20,7 +21,7 @@ router.post('/submit', function(req, res) {
 
 router.get('/:workid', function(req, res) {
 	var workid = req.params.workid;
-	console.log('workid =>', workid);
+	logger.info('workid =>', workid);
 	findComments(workid, function(data) {
 		res.send(data);
 	});

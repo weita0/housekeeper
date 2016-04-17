@@ -1,7 +1,7 @@
 /**
  * Employee model
  */
-module.exports = function(name, password, gender, birth, locate, idnum, workid, type) {
+module.exports = function(name, password, gender, birth, locate, idnum, type) {
 	return {
 		name: name,
 		password: password, // at least 9 characters
@@ -9,7 +9,7 @@ module.exports = function(name, password, gender, birth, locate, idnum, workid, 
 		birth: birth,  // format 'xxxx-xx-xx'
 		locate: locate, // [latitude, longtitude]
 		idnum: idnum,  // 18 characters
-		workid: workid, // auto created, not provided by user
+		//workid: workid, // auto created, not provided by user
 		type: type // 4 types: ('wa')washing, ('la')laundry, ('ba')babysitter, ('nu')nurse 
 	};
 };

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	h1 User Management System
+	h2 Sign in
+	form(action="/users/signin" method="post")
+		label(for="username") username 
+		input(type="text" name="username")
+		br
+		label(for="password") password 
+		input(type="password" name="password")
+		br
+		input(type="submit" value="submit")
+	h2 Sign on
+	form(action="/users/signon" method="post")
+		label(for="username") username 
+		input(type="text" name="username")
+		br
+		label(for="password") password 
+		input(type="password" name="password")
+		br
+		label(for="tel") tel 
+		input(type="text" name="tel")
+		br
+		input(type="submit" value="submit")

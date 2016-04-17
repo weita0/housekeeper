@@ -1,8 +1,14 @@
-var crypto = require('crypto');
+var crypto = require('crypto'),
+	logger = require('../util/logger');
 
 module.exports = function(data) {
-	console.log('data -', data,
+
+	logger.info('data -', data,
 				'\ntype -', typeof data);
-	var hash = crypto.createHash('sha256');
-	return hash.update(data).digest('hex');
+	if(data !== undefined) {
+		var hash = crypto.createHash('sha256');
+		return hash.update(data).digest('hex');
+	} else {
+		return 'data is undefined!';
+	}	
 };

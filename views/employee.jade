@@ -2,6 +2,7 @@ extends layout
 
 block content
 	h1 Employee Management System
+	h2 Register
 	form(action="/employee/reg", method="post")
 		label(for="name") Name:
 		input(type="text", name="name")
@@ -11,7 +12,9 @@ block content
 		br
 		label(for="gender") Gender:
 		input(type="radio", name="gender", value="m") 
+		|male
 		input(type="radio", name="gender", value="f") 
+		|female
 		br
 		label(for="birth") birthday:
 		input(type="text", name="birth")
@@ -23,6 +26,22 @@ block content
 		input(type="idnum", name="idnum")
 		br
 		label(for="type") Type:
-		input(type="text", name="type")
+		input(type="radio", name="type", value="wa")
+		|washing
+		input(type="radio", name="type", value="la")
+		|laundry
+		input(type="radio", name="type", value="ba")
+		|babysitting
+		input(type="radio", name="type", value="nu")
+		|nurse 
 		br
 		input(type="submit", value="提交")
+	h2 Log in
+	form(action="/employee/login" method="post")
+		label(for="workid") workid  
+		input(type="text" name="workid")
+		br
+		label(for="password") password
+		input(type="password" name="password")
+		br
+		input(type="submit" value="submit")

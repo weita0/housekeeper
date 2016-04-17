@@ -3,6 +3,7 @@ var router = express.Router();
 var reg = require('../modules/emp/register');
 var login = require('../modules/emp/login');
 var employee = require('../modules/model/employee');
+var logger = require('../modules/util/logger');
 
 router.get('/', function(req, res) {
 	res.render('employee');
@@ -16,7 +17,7 @@ router.post('/reg', function(req, res) {
 		locate = req.body.locate,
 		idnum = req.body.idnum;
 		type = req.body.type;
-	console.log('name -', name,
+	logger.info('name -', name,
 				'\npwd -', password,
 				'\ngen -', gender,
 				'\nbir -', birth,
@@ -24,14 +25,7 @@ router.post('/reg', function(req, res) {
 				'\nidnum -', idnum,
 				'\ntype -', type);
 	/* to be done... */
-	reg(employee(
-			name: name, 
-			password: password, 
-			gender: gender,
-			birth: birth,
-			locate: locate, 
-			idnum: idnum,
-			type: type), function(employee) {
+	reg(employee(name, password, gender, birth, locate, idnum, type), function(employee) {
 		res.send(JSON.stringify(employee));
 	});
 });

@@ -2,18 +2,19 @@ var express = require('express');
 var router = express.Router();
 var signin = require('../modules/auth/signin');
 var signon = require('../modules/auth/signon');
+var logger = require('../modules/util/logger');
 
 //var Schema = mongoose.Schema;
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-	res.send('user management system');
+	res.render('user');
 });
 
 router.post('/signin', function(req, res) {
 	var username = req.body.username,
 		password = req.body.password;
-	console.log('request.username =>', username,
+	logger.info('request.username =>', username,
 				'\nrequest.password =>', password);
 	signin(username, password, function(userinfo) {
 		if(Object.keys(userinfo).length !== 0) {
@@ -28,7 +29,7 @@ router.post('/signon', function(req, res) {
 	var username = req.body.username,
 		password = req.body.password,
 		tel = req.body.tel;
-	console.log('request.username =>', username,
+	logger.info('request.username =>', username,
 				'\nrequest.password =>', password,
 				'\nrequest.tel =>', tel);
 	signon(username, password, tel, function(theuser) {

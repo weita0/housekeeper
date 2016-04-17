@@ -3,7 +3,8 @@
  */
 var db = db || {},
 	dbinfo = require('./dbinfo');
-	MongoClient = require('mongodb').MongoClient;
+	MongoClient = require('mongodb').MongoClient,
+	logger = require('../util/logger');
 
 db.connect = function(fn) {
 	var info = dbinfo(),
@@ -16,7 +17,7 @@ db.connect = function(fn) {
 		var url = 'mongodb://' + dbuser + ':' + dbpassword + '@' + uri;
 	}
 	
-	console.log('url =>', url)
+	logger.info('url =>', url)
 	MongoClient.connect(url, function(err, db) {
 		if (err) 
 			throw err;

@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
+var logger = require('../util/logger');
 var dbinfo = dbinfo || {};
 
 /*
@@ -22,7 +23,7 @@ dbinfo.uri = dbinfo.hostname + ':' + dbinfo.port + '/' + dbinfo.dbname;
 */
 
 module.exports = function() {
-	console.log('config path =>', path.join(__dirname, '../../config/localdb.json'));
+	logger.info('db config =>', path.join(__dirname, '../../config/localdb.json'));
 	var obj = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/localdb.json'), 'utf8').toString());
 	for(var i in obj) {
 		dbinfo[i] = obj[i];

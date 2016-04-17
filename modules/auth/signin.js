@@ -3,7 +3,8 @@
  */
 var connect = require('../db/connect'),
 	encrypt = require('../security/encrypt'),
-	user = require('../model/user');
+	user = require('../model/user')
+	logger = require('../util/logger');
 
 module.exports = function(username, password, fn) {
 	connect.connect(function(db) {
@@ -19,7 +20,7 @@ module.exports = function(username, password, fn) {
 		}, function(err) {
 			if(err)
 				throw err;
-			console.log('pass =>', pass);
+			logger.info('pass =>', pass);
 			fn(userinfo);
 			console.log('connection closed.');
 			db.close();	
