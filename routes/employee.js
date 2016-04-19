@@ -30,6 +30,12 @@ router.post('/reg', function(req, res) {
 	});
 });
 
+router.get('/:type', function(req, res) {
+	var type = req.params.type;
+	logger.info('type =>', type);
+	res.send(type);
+});
+
 router.post('/login', function(req, res) {
 	var workid = req.body.workid,
 		password = req.body.password;

@@ -4,26 +4,25 @@ block content
 	h1 Comment System
 	h2 Commit one comment
 	form(action="/comment/submit", method="post")
-		label(for="workid") WorkID:
-		input(name="workid", type="text")
-		br
-		label(for="rate") Rate:
-		input(name="rate", type="text")
-		br
-		label(for="comment") Comment:
-		input(name="comment", type="text")
-		br
-		label(for="tel") Tel:
-		input(name="tel", type="text")
-		br
-		input(value="submit" type="submit")
+		p
+			label(for="workid") WorkID:
+				input(name="workid", type="text")
+		p
+			label(for="rate") Rate:
+				input(name="rate", type="text")
+		p
+			label(for="comment") Comment:
+				input(name="comment", type="text")
+		p
+			label(for="tel") Tel:
+				input(name="tel", type="text")
+		p
+			input(value="submit" type="submit")
 	h2 Search comments
 	form(method="post", name="search")
-		label(for="workid") WorkID:
-		select(name="workid")
-			- for(var i = 0; i < #{array}.length; i++) {
-				option #{array}[i]
-			- }
-		br
-		input(value="search",type="submit")
+		p
+			label(for="workid") WorkID:
+				select(name="workid")
+		p
+			input(value="search",type="submit")
 
