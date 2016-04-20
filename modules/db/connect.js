@@ -21,6 +21,7 @@ db.connect = function(fn) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) 
 			throw err;
+		logger.debug('Connection has established. ');
 		fn(db);
 		//console.log('connection closed.');
 	});

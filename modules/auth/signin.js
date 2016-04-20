@@ -9,20 +9,19 @@ var connect = require('../db/connect'),
 module.exports = function(username, password, fn) {
 	connect.connect(function(db) {
 		var cursor = db.collection('user').find({"username": username, "password": encrypt(password) });
-		var pass = false;
 		var userinfo = {};
+		var success = false;
 		cursor.forEach(function(doc) {
 			if(doc != null) {
+				success = true;
 				console.log(doc);
-				//pass = true;
 				userinfo = user(doc.username, doc.tel);
 			}
 		}, function(err) {
 			if(err)
 				throw err;
-			logger.info('pass =>', pass);
-			fn(userinfo);
-			console.log('connection closed.');
+			fn({message: success, user: userinfo});
+			console.log('Connection closed.');
 			db.close();	
 		});
 	});

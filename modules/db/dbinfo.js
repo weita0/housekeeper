@@ -23,8 +23,9 @@ dbinfo.uri = dbinfo.hostname + ':' + dbinfo.port + '/' + dbinfo.dbname;
 */
 
 module.exports = function() {
-	logger.info('db config =>', path.join(__dirname, '../../config/localdb.json'));
-	var obj = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/localdb.json'), 'utf8').toString());
+	var config = path.join(__dirname, '../../config/db.json');
+	logger.info('db config =>', config);
+	var obj = JSON.parse(fs.readFileSync(config, 'utf8').toString());
 	for(var i in obj) {
 		dbinfo[i] = obj[i];
 	}
