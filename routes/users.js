@@ -11,9 +11,9 @@ router.get('/', function(req, res) {
 	res.render('user');
 });
 
-router.post('/signin', function(req, res) {
-	var username = req.body.username,
-		password = req.body.password;
+router.get('/signin', function(req, res) {
+	var username = req.query.username,
+		password = req.query.password;
 	logger.info('request.username =>', username,
 				'\nrequest.password =>', password);
 	signin(username, password, function(userinfo) {
@@ -25,10 +25,10 @@ router.post('/signin', function(req, res) {
 	});
 });
 
-router.post('/signon', function(req, res) {
-	var username = req.body.username,
-		password = req.body.password,
-		tel = req.body.tel;
+router.get('/signon', function(req, res) {
+	var username = req.query.username,
+		password = req.query.password,
+		tel = req.query.tel;
 	logger.info('request.username =>', username,
 				'\nrequest.password =>', password,
 				'\nrequest.tel =>', tel);

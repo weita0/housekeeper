@@ -10,14 +10,14 @@ router.get('/', function(req, res) {
 	res.render('employee');
 });
 
-router.post('/reg', function(req, res) {
-	var name = req.body.name,
-		password = req.body.password,
-		gender = req.body.gender,
-		birth = req.body.birth,
-		locate = req.body.locate,
-		idnum = req.body.idnum;
-		type = req.body.type;
+router.get('/reg', function(req, res) {
+	var name = req.query.name,
+		password = req.query.password,
+		gender = req.query.gender,
+		birth = req.query.birth,
+		locate = req.query.locate,
+		idnum = req.query.idnum;
+		type = req.query.type;
 	logger.debug('name -', name,
 				'\npwd -', password,
 				'\ngen -', gender,
@@ -31,9 +31,9 @@ router.post('/reg', function(req, res) {
 	});
 });
 
-router.post('/login', function(req, res) {
-	var workid = req.body.workid,
-		password = req.body.password;
+router.get('/login', function(req, res) {
+	var workid = req.query.workid,
+		password = req.query.password;
 	login(workid, password, function(employee) {
 		res.send(JSON.stringify(employee));
 	});
