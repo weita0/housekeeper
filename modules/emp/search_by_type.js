@@ -1,4 +1,5 @@
 var db = require('../db/connect');
+var age = require('../util/getAge');
 
 var searchByType = function(type, fn) {
 	db.connect(function(db) {

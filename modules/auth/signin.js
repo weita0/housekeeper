@@ -10,17 +10,18 @@ module.exports = function(username, password, fn) {
 	connect.connect(function(db) {
 		var cursor = db.collection('user').find({"username": username, "password": encrypt(password) });
 		var userinfo = {};
-		var success = false;
+		var msg = 'false';
 		cursor.forEach(function(doc) {
 			if(doc != null) {
-				success = true;
+				msg = 'true';
 				console.log(doc);
 				userinfo = user(doc.username, doc.tel);
 			}
 		}, function(err) {
 			if(err)
 				throw err;
-			fn({message: success, user: userinfo});
+			fn({message: msg,
+				user: userinfo});
 			console.log('Connection closed.');
 			db.close();	
 		});

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var reg = require('../modules/emp/register');
 var login = require('../modules/emp/login');
+var search = require('../modules/emp/search_by_type');
 var employee = require('../modules/model/employee');
 var logger = require('../modules/util/logger');
 
@@ -17,7 +18,7 @@ router.post('/reg', function(req, res) {
 		locate = req.body.locate,
 		idnum = req.body.idnum;
 		type = req.body.type;
-	logger.info('name -', name,
+	logger.debug('name -', name,
 				'\npwd -', password,
 				'\ngen -', gender,
 				'\nbir -', birth,
@@ -30,17 +31,19 @@ router.post('/reg', function(req, res) {
 	});
 });
 
-router.get('/:type', function(req, res) {
-	var type = req.params.type;
-	logger.info('type =>', type);
-	res.send(type);
-});
-
 router.post('/login', function(req, res) {
 	var workid = req.body.workid,
 		password = req.body.password;
-	login(employee({workid: workid, password: password}), function(employee) {
+	login(workid, password, function(employee) {
 		res.send(JSON.stringify(employee));
+	});
+});
+
+router.get('/:type', function(req, res) {
+	var type = req.params.type;
+	logger.info('type =>', type);
+	search(type, function(lst) {
+
 	});
 });
 

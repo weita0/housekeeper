@@ -25,9 +25,13 @@ module.exports = function(username, password, tel, fn) {
 					"password": encrypt(password),
 					"tel": tel
 				});
-				fn(user(username, tel));
+				var msg = 'true';
+				fn({message: msg,
+				    user: user(username, tel)});
 			} else {
-				fn({});
+				var msg = 'false';
+				fn({message: msg, 
+					user: {}});
 			}
 			db.close();
 		});
