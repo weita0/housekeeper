@@ -40,6 +40,11 @@ router.get('/login', function(req, res) {
 });
 
 router.get('/:type', function(req, res) {
+	logger.debug('req.baseUrl =>', req.baseUrl, // /employee
+					 '\treq.hostname =>', req.hostname, // localhost
+					 '\treq.ip =>', req.ip, //::1
+					 '\treq.ips =>', req.ips, //[]
+					 '\treq.path =>', req.path); // /wa
 	var type = req.params.type;
 	logger.info('type =>', type);
 	search(type, function(lst) {

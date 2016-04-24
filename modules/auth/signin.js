@@ -22,8 +22,9 @@ module.exports = function(username, password, fn) {
 				throw err;
 			fn({message: msg,
 				user: userinfo});
-			console.log('Connection closed.');
+			
 			db.close();	
+			logger.debug('Connection closed.');
 		});
 	});
 };
