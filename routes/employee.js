@@ -43,7 +43,7 @@ router.get('/:type', function(req, res) {
 	var type = req.params.type;
 	logger.info('type =>', type);
 	search(type, function(lst) {
-
+		res.json(lst);
 	});
 });
 

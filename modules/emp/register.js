@@ -29,12 +29,12 @@ var reg = function(employee, fn) {
 				delete employee.password;
 				delete employee._id;
 				//console.log('after insert =>', employee);
-				var msg = 'true';
+				var msg = 1;
 				fn({ message: msg,
 					 employee: employee});
 				db.close();
 			} else {
-				var msg = 'false';
+				var msg = 2;
 				fn({ message: msg,
 					 employee: {}});
 				db.close();
