@@ -9,9 +9,18 @@ var searchByType = function(type, fn) {
 			res.push({
 				name: doc.name,
 				gender: doc.gender,
-				age: doc.birth,
+				age: age(doc.birth),
 				locate: doc.locate
 			});
+		}, function (err) {
+			if (err) {
+				throw err;
+			}
+			fn({message: 'true', employees: res});
+			db.close();
+			logger.debug('Connection closed');
 		});
 	});
 }
+
+module.exports = searchByType;

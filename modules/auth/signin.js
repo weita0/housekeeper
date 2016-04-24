@@ -10,10 +10,10 @@ module.exports = function(username, password, fn) {
 	connect.connect(function(db) {
 		var cursor = db.collection('user').find({"username": username, "password": encrypt(password) });
 		var userinfo = {};
-		var msg = 'false';
+		var msg = 2;
 		cursor.forEach(function(doc) {
 			if(doc != null) {
-				msg = 'true';
+				msg = 1;
 				console.log(doc);
 				userinfo = user(doc.username, doc.tel);
 			}

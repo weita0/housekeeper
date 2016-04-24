@@ -8,6 +8,7 @@ module.exports = function(workid, fn) {
 	db.connect(function(db) {
 		var cursor = db.collection('comment').find({'workid': workid});
 		var comments = [];
+		var msg = 2;
 		cursor.forEach(function(doc) {
 			if(doc !== null) {
 				comments.push({
@@ -16,6 +17,7 @@ module.exports = function(workid, fn) {
 					rate: doc.rate
 				});
 			}
+			msg = 1;
 		}, function(err) {
 			if(err)
 				throw err;
@@ -24,7 +26,7 @@ module.exports = function(workid, fn) {
 				user.findUsername(db, comment.tel, function(username) {
 					comment.username = username;
 					if(++idx === comments.length) {
-						fn(comments);
+						fn({message: msg, comments: comments});
 						db.close();
 					}
 				});

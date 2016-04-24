@@ -25,11 +25,11 @@ module.exports = function(username, password, tel, fn) {
 					"password": encrypt(password),
 					"tel": tel
 				});
-				var msg = 'true';
+				var msg = 1;
 				fn({message: msg,
 				    user: user(username, tel)});
 			} else {
-				var msg = 'false';
+				var msg = 2;
 				fn({message: msg, 
 					user: {}});
 			}
