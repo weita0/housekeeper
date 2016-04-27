@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+/* for testing */
+
 router.get('/', function (req, res) {
-	res.send('Image Server');
+	res.render('imgUpload');
 });
 
-router.get('/:no', function (req, res) {
-	var picNum = req.params.no;
-	
-});
 
 module.exports = router;

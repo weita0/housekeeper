@@ -23,7 +23,6 @@ db.connect = function(fn) {
 			throw err;
 		logger.debug('Connection has established. ');
 		fn(db);
-		//console.log('connection closed.');
 	});
 };
 

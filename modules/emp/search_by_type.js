@@ -16,9 +16,11 @@ var searchByType = function (type, fn) {
 			}
 			res.push({
 				name: doc.name,
+				workid: doc.workid,
 				gender: doc.gender,
 				age: age(doc.birth),
 				locate: doc.locate,
+				score: doc.score,
 				imageurl: image
 			});
 		}, function (err) {
