@@ -28,6 +28,7 @@ var search_by_id = function (workid, fn) {
 			var cursor2 = db.collection('comment').find({"workid": workid});
 			var amount = 0;
 			var flag = 0;
+			var isNull = true;
 			cursor2.forEach(function (doc) {
 				if(doc) {
 					amount++;
@@ -39,13 +40,18 @@ var search_by_id = function (workid, fn) {
 							username: username
 						});
 						flag++;
-						if(flag === amount) {
+						if(flag === amount && !isNull) {
 							db.close();
 							fn(emp);
 						}
 					});			
-				}
+				} 
 			});
+			
+			if (amount === flag && amount ===0 && flag === 0 && isNull) {
+				db.close();
+				fn(emp);
+			}
 		});
 	});
 };

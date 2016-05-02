@@ -3,7 +3,7 @@ var age = require('../util/getAge');
 var logger = require('../util/logger');
 var path = require('path');
 
-var host = '139.129.133.217:3000';
+var host = 'http://139.129.133.217:3000';
 
 var searchByType = function (type, fn) {
 	db.connect(function(db) {
