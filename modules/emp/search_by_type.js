@@ -28,7 +28,7 @@ var searchByType = function (type, fn) {
 				gender: doc.gender,
 				age: age(doc.birth),
 				locate: doc.locate,
-				score: score,
+				score: String(score),
 				imageurl: image
 			});
 		}, function (err) {

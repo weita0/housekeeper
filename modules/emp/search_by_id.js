@@ -10,11 +10,16 @@ var search_by_id = function (workid, fn) {
 	db.connect(function (db) {
 		var cursor = db.collection('employee').find({"workid": workid});
 		cursor.forEach(function (doc) {
+			if (doc.score === undefined) {
+				var score = 0;
+			} else {
+				var score = doc.score;
+			}
 			if (doc) {
 				emp.workid = doc.workid,
 				emp.name = doc.name,
 				emp.gender = doc.gender,
-				emp.score = doc.score,
+				emp.score = String(score),
 				emp.age = age(doc.birth),
 				emp.imageurl = doc.imageurl,
 				emp.locate = doc.locate,
