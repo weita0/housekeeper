@@ -8,7 +8,7 @@ module.exports = function(workid, fn) {
 	db.connect(function(db) {
 		var cursor = db.collection('comment').find({'workid': workid});
 		var comments = [];
-		var msg = 2;
+		var msg = '2';
 		cursor.forEach(function(doc) {
 			if(doc !== null) {
 				comments.push({
@@ -17,7 +17,7 @@ module.exports = function(workid, fn) {
 					rate: doc.rate
 				});
 			}
-			msg = 1;
+			msg = '1';
 		}, function(err) {
 			if(err)
 				throw err;
