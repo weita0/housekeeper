@@ -10,7 +10,10 @@ var searchByType = function (type, fn) {
 		var cursor = db.collection('employee').find({ 'type': type });
 		var res = [];
 		cursor.forEach(function (doc) {
-			var imageurl = doc.imageurl.replace('\\', '\/');
+			
+			if(doc.imageurl !== undefined) {
+				var imageurl = doc.imageurl.replace('\\', '\/');
+			}
 			
 			if (imageurl !== undefined) {
 				var image = host + '\/' + imageurl;

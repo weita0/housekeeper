@@ -1,31 +1,40 @@
 var db = require('../modules/db/connect');
+var test = require('assert');
 
 db.connect(function (db) {
-   var cursor = db.collection('comment').find({'workid': 'j7112044'});
-   for (var i in cursor) {
-       if (typeof cursor[i] === 'function') {
-           //console.log(i);
-       }
-   }
-   //cursor = cursor.next();
+   'use strict';
+   var collection = db.collection('comment');
    
-   console.log('cursorLimit =>', cursor.cursorLimit());
+   var cursor = collection.find({'workid': 'j7112044'});
    
-   while (cursor.hasNext()) {
-       console.log(1);
-       cursor.next();
-   }
-   
-   
-   cursor.forEach(function (doc) {
-     var workid = doc.workid,
-       rate = doc.rate,
-       comment = doc.comment;
-       console.log('workid =>', workid,
-                 '\nrate =>', rate,
-                 '\ncomment =>', comment); 
-     }, function () {
-       db.close();
+   var i = 0;
+   /*
+   cursor.hasNext().then(function (o) {
+      if (o) {
+          
+          cursor.forEach(function (doc) {
+             console.log('i =>', i);
+             i += 1;
+             console.log('workid =>', doc.workid,
+                         '\nrate =>', doc.rate,
+                         '\ncomment =>', doc.comment); 
+          });
+      }
    });
+   */
+  cursor.toArray(function (err, result) {
+      if (err) {
+          throw err;
+      } else if (result.length) {
+          console.log('Found:', result.length);
+          for (var i = 0; i < result.length; i+=1) {
+              console.log(result[i]);
+          }
+      } else {
+          console.log('nothing found');
+      }
+      //db.close();
+  });
+   
    
 });

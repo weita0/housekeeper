@@ -2,63 +2,80 @@ var db = require('../db/connect'),
 	logger = require('../util/logger'),
 	age = require('../util/getAge'),
 	user = require('../user/user');
+	
+// Step1: connect to db;
+// Step2: db.collection('employee').find({"workid": workid});
+// Step3: cursor.forEach()
+// Step4: db.collection('comment').find({"workid": workid});
+// Step5: cursor.forEach()
+// Step6:
+var host = 'http://139.129.133.217:3000';
 
 var search_by_id = function (workid, fn) {
-	// not only employee information needed, but comments of the employee needed
 	var emp = {};
 	emp.comments = [];
 	db.connect(function (db) {
-		var cursor = db.collection('employee').find({"workid": workid});
-		cursor.forEach(function (doc) {
-			if (doc.score === undefined) {
-				var score = 0;
-			} else {
-				var score = doc.score;
-			}
-			if (doc) {
-				emp.workid = doc.workid,
-				emp.name = doc.name,
-				emp.gender = doc.gender,
-				emp.score = String(score),
-				emp.age = age(doc.birth),
-				emp.imageurl = doc.imageurl,
-				emp.locate = doc.locate,
-				emp.type = doc.type
-			}
-			logger.info('1 =>', emp);
-		}, function (err) {
+		var cursor = db.collection('employee').find({'workid': workid});
+		cursor.toArray(function (err, res) {
 			if (err) {
 				throw err;
+			} else if (res.length) {
+				// do something...
+				var len = res.length;
+				if (res[0].score === undefined) {
+					var score = 0;
+				} else {
+					var score = res[0].score;
+				}
+				
+				if(res[0].imageurl !== undefined) {
+					var imageurl = res[0].imageurl.replace('\\', '\/');
+				}
+				
+				if (imageurl !== undefined) {
+					var image = host + '\/' + imageurl;
+				}
+				
+				if (len === 1) {
+					emp.workid = res[0].workid,
+					emp.name = res[0].name,
+					emp.gender = res[0].gender,
+					emp.score = String(score),
+					emp.age = age(res[0].birth),
+					emp.imageurl = image,
+					emp.locate = res[0].locate,
+					emp.type = res[0].type;
+				}
+			} else {
+				logger.info('No data response..');
 			}
-			var cursor2 = db.collection('comment').find({"workid": workid});
-			var amount = 0;
-			var flag = 0;
-			var isNull = true;
-			cursor2.forEach(function (doc) {
-				if(doc) {
-					amount++;
-					var tel = doc.tel;
-					user.findUsername(db, tel, function(username) {
+			var cursor2 = db.collection('comment').find({'workid': workid});
+			cursor2.toArray(function (err, res) {
+				if (err) {
+					throw err;
+				} else if (res.length) {
+					var len = res.length;
+					for (var i = 0; i < len; i += 1) {
+						var tem = res[i];
 						emp.comments.push({
-							rate: doc.rate,
-							comment: doc.comment,
-							username: username
+							rate: tem.rate,
+							comment: tem.comment,
+							username: tem.tel
 						});
-						flag++;
-						if(flag === amount && !isNull) {
-							db.close();
-							fn(emp);
-						}
-					});			
-				} 
+					}
+				} else {
+					logger.info('no comment data..');
+				}
+				
+				db.close();
+				logger.debug('Connection closed.');
+				fn(emp);
 			});
 			
-			if (amount === flag && amount ===0 && flag === 0 && isNull) {
-				db.close();
-				fn(emp);
-			}
 		});
 	});
+	
 };
+
 
 module.exports = search_by_id;
