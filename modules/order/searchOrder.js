@@ -1,5 +1,6 @@
 var db = require('../db/connect');
 var logger = require('../util/logger'); 
+var dateFormat = require('../util/dateForm');
 
 module.exports = function (tel, cb) {
     var orders = [];
@@ -25,7 +26,7 @@ module.exports = function (tel, cb) {
                         'duration': tem.duration,
                         'area': tem.area,
                         'quantity': tem.quantity,
-                        'date': tem.date,
+                        'date': dateFormat(tem.date),
                         'paid': tem.paid 
                     });
                 }
